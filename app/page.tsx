@@ -1,85 +1,140 @@
+"use client";
+
+import { useEffect } from "react";
+
 // ============================================================
-// EDIT THIS BLOCK. Everything below it renders from this data,
-// so you never have to touch the JSX to add or change content.
+// EDIT THIS BLOCK ONLY.
 // ============================================================
 
 const me = {
   name: "Tisha Bajaj",
-  headline: "Teaching myself to build things that work end to end.",
+  status: "bca student // learning to build",
+    headline: "Curious about how things work. Stubborn about finding out.",
+  location: "Delhi, India",
   email: "tisheyy27@gmail.com",
   github: "https://github.com/tisheyy27",
-  linkedin: "www.linkedin.com/in/tisha-bajaj-",
+  linkedin: "https://www.linkedin.com/in/tisha-bajaj-",
+  resume: "/resume.pdf",
 };
-const projects = [
-  {
-    title: "Project name",
-    role: "Solo build · 2026",
-    body: "One or two sentences on what it does and who it's for. Lead with the problem it solves, not the tech. If it has real users or a number attached — downloads, uptime, teams using it — put that here.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL"],
-    live: "https://example.com",
-    code: "https://github.com/tisheyy27/project",
-  },
-  {
-    title: "Second project",
-    role: "Team of 4 · 2026",
-    body: "What you personally owned matters more than what the team shipped. Say which part was yours — the API, the auth flow, the data pipeline.",
-    stack: ["React", "Node.js", "MongoDB"],
-    live: "",
-    code: "https://github.com/tisheyy27/project-two",
-  },
-  {
-    title: "Third project",
-    role: "Hackathon · 2026",
-    body: "Smaller builds are still worth listing if they show range. A CLI tool, a Chrome extension, a scraper — anything that shows you finish things.",
-    stack: ["Python", "FastAPI"],
-    live: "",
-    code: "https://github.com/tisheyy27/project-three",
-  },
-];
 
-
- const experience = [
-  {
-    when: "2026 — present",
-     title: "Software Development Intern",
-     where: "Company name",
-     what: "One line on what you shipped. Use a verb and an outcome: reduced page load from 4s to 900ms, built the notification service, migrated 12 endpoints off the legacy API.",
-  },
-   {
-     when: "2025 — 2026",
-     title: "Your earlier role",
-     where: "Organisation or society",
-     what: "Club positions, teaching assistantships and freelance work all count. Describe them the same way — what you did, what changed because of it.",
- },
-];
+const tags = ["Python", "C", "SQL", "Git", "Java", "Machine Learning"];
 
 const skills = [
-  { group: "Languages", items: "C, Python, Java, SQL" },
-
-  { group: "Tooling", items: "Git, Docker, Vercel, Netlify" },
+  { tag: "Programming & Logic", name: "Python", icon: "🐍", note: "Writing clean logic for automation, data handling, and working through problems step by step." },
+  { tag: "Systems & Memory", name: "C", icon: "⚙️", note: "Pointers, memory, and the low-level thinking that makes every other language easier to reason about." },
+  { tag: "Data Architecture", name: "SQL & Databases", icon: "🗄️", note: "Queries, joins, schema design, and thinking about how data should be shaped before it's stored." },
+  { tag: "Version Control", name: "Git & GitHub", icon: "🌿", note: "Branches, commits, and keeping work public so it can be read." },
+  { tag: "Learning now", name: "Java", icon: "☕", note: "Object-oriented fundamentals — classes, inheritance, and structuring larger programs properly." },
+  { tag: "Learning now", name: "Machine Learning", icon: "🧠", note: "Supervised learning and dataset preprocessing. Early days, but the direction I want to go." },
 ];
 
-// ============================================================
-// Below here you only need to touch things if you want to
-// change the layout itself.
+const tools = [
+  { icon: "🐍", name: "Python 3" },
+  { icon: "⌨️", name: "VS Code" },
+  { icon: "🌿", name: "Git & GitHub" },
+  { icon: "🪐", name: "Google Colab" },
+  { icon: "📓", name: "Jupyter Notebook" },
+  { icon: "🗄️", name: "MySQL" },
+  { icon: "💻", name: "GCC / C Compiler" },
+  { icon: "🌐", name: "Netlify" },
+  { icon: "🎨", name: "Canva" },
+  { icon: "🖌️", name: "Figma" },
+];
+
+const education = [
+  {
+    when: "2025 — 2028",
+    label: "Current degree",
+    title: "Bachelor of Computer Applications (BCA)",
+    where: "Bharati Vidyapeeth Institute of Management and Research (BVIMR), Delhi",
+    what: "Programming in Python and C, database systems, data structures, and the foundations of artificial intelligence.",
+  },
+  {
+    when: "Class XII, 2025",
+    label: "Schooling",
+    title: "Senior Secondary — Commerce",
+    where: "Veda Vyasa DAV Public School, Vikaspuri, Delhi",
+    what: "Commerce taught me how businesses work. Then I got curious about how the software running them works, and switched to computer applications for my degree.",
+  },
+];
+
+const involvement = [
+  {
+    when: "2025 — present",
+    label: "Technical society",
+    title: "Creative Director, Core Team",
+    where: "Quantaloop — Technical Society of BVIMR",
+    what: "Part of the core team running the society's hackathons and technical events. I handle the creative side — event branding, posters, and the visual material that goes out before and during each event.",
+  },
+  {
+    when: "2025 — present",
+    label: "Incubation cell",
+    title: "Co-Head, Social Media",
+    where: "Nexel — Incubation Cell of BVIMR",
+    what: "Co-leading social media for the campus incubation cell. Planning what goes out, writing and designing the posts, and keeping a consistent voice across everything we publish.",
+  },
+];
+
+const focus = [
+  { title: "Programming Fundamentals", note: "Getting properly comfortable in C and Java rather than knowing a little of many languages. Memory, structure, and how programs are actually organised." },
+  { title: "Machine Learning Foundations", note: "Working through supervised learning end to end — cleaning a dataset, training something small, and understanding why it does or doesn't generalise." },
+  { title: "Databases & Data Modelling", note: "Designing schemas that hold up, and writing queries that don't fall apart when the data grows." },
+  { title: "Finishing What I Start", note: "Moving past tutorials to projects that run on their own. Something isn't done until someone else can open it." },
+];
+
 // ============================================================
 
 export default function Home() {
+  useEffect(() => {
+    const glow = document.getElementById("cursor-glow");
+
+    const move = (e: MouseEvent) => {
+      if (!glow) return;
+      glow.style.left = `${e.clientX}px`;
+      glow.style.top = `${e.clientY}px`;
+    };
+
+    window.addEventListener("mousemove", move);
+
+    const targets = document.querySelectorAll(
+      ".section .eyebrow, .section .big, .section-intro, .cell, .chips li, .entry, .focus-item, .contact-cell, .about-copy p, .about-facts > div"
+    );
+
+    targets.forEach((el) => el.classList.add("reveal"));
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    targets.forEach((el) => io.observe(el));
+
+    return () => {
+      window.removeEventListener("mousemove", move);
+      io.disconnect();
+    };
+  }, []);
+
   return (
     <>
+      <div className="cursor-glow" id="cursor-glow" />
+
       <nav className="nav">
         <div className="wrap nav-inner">
-          <a href="#top" className="nav-mark">
-            {me.name}
-          </a>
+          <a href="#top" className="nav-mark">TISHA<span>.</span></a>
           <div className="nav-links">
-            <a href="#work">Work</a>
-            <a href="#experience" className="nav-hide">
-              Experience
-            </a>
-            <a href="#about" className="nav-hide">
-              About
-            </a>
+            <a href="#about">About</a>
+            <a href="#skills" className="nav-hide">Skills</a>
+            <a href="#tools" className="nav-hide">Tools</a>
+            <a href="#education" className="nav-hide">Education</a>
+            <a href="#involvement" className="nav-hide">Societies</a>
             <a href="#contact">Contact</a>
           </div>
         </div>
@@ -88,129 +143,193 @@ export default function Home() {
       <main id="top">
         <header className="hero">
           <div className="wrap">
-            <h1>{me.name}</h1>
-            <p className="hero-line">
-              <em>{me.headline}</em>
-            </p>
+            <p className="hero-prompt">{me.status}</p>
+            <h1>Hi, I&apos;m Tisha<span className="caret">_</span></h1>
+            <p className="hero-line">{me.headline}</p>
+            <ul className="hero-tags">
+              {tags.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
             <div className="hero-meta">
               <span>{me.location}</span>
-              <a href={me.github} target="_blank" rel="noreferrer">
-                GitHub
-              </a>
-              <a href={me.linkedin} target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
+              <a href={me.github} target="_blank" rel="noreferrer">GitHub</a>
+              <a href={me.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
               <a href={me.resume}>Résumé</a>
             </div>
           </div>
         </header>
 
-        <section className="section" id="work">
+        <section className="section band" id="about">
           <div className="wrap">
-            <h2 className="section-head">Selected work</h2>
-            {projects.map((p) => (
-              <article className="project" key={p.title}>
-                <h3 className="project-title">
-                  {p.live ? (
-                    <a href={p.live} target="_blank" rel="noreferrer">
-                      {p.title}
-                    </a>
-                  ) : (
-                    p.title
-                  )}
-                </h3>
-                <p className="project-role">{p.role}</p>
-                <p className="project-body">{p.body}</p>
-                <ul className="stack">
-                  {p.stack.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
-                <div className="project-links">
-                  {p.live && (
-                    <a href={p.live} target="_blank" rel="noreferrer">
-                      Visit site
-                    </a>
-                  )}
-                  {p.code && (
-                    <a href={p.code} target="_blank" rel="noreferrer">
-                      Read the code
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section" id="experience">
-          <div className="wrap">
-            <h2 className="section-head">Experience</h2>
-            {experience.map((r) => (
-              <div className="role" key={r.title + r.when}>
-                <div className="role-when">{r.when}</div>
-                <div>
-                  <h3>{r.title}</h3>
-                  <p className="role-where">{r.where}</p>
-                  <p className="role-what">{r.what}</p>
+            <span className="eyebrow">About me</span>
+            <div className="about-split">
+              <div>
+                <h3 className="big">Learning in public, one build at a time<span className="dot">.</span></h3>
+              </div>
+              <div className="about-copy">
+                <p>
+                  I came to programming from commerce, and started my BCA at
+                  Bharati Vidyapeeth (BVIMR), Delhi without a line of code
+                  behind me. Starting from zero meant I couldn&apos;t skip the
+                  fundamentals, which turned out to be the better way in.
+                </p>
+                <p>
+                  I work mostly in Python and C, with SQL for anything
+                  involving data, and I&apos;m adding Java and the basics of
+                  machine learning. I&apos;ve kept the stack small on purpose.
+                  I&apos;d rather explain why a pointer behaves the way it does
+                  than list ten frameworks I&apos;ve only seen once.
+                </p>
+                <p>
+                  Outside coursework I sit on the core teams of two campus
+                  societies — running hackathons and events at one, leading
+                  social media at the other. The part I like most is the one
+                  nobody films for tutorials: the hour where something almost
+                  works. That&apos;s usually where I learn the thing I&apos;ll
+                  still remember six months later.
+                </p>
+                <div className="about-facts">
+                  <div>
+                    <span>Based in</span>
+                    <strong>Delhi, India</strong>
+                  </div>
+                  <div>
+                    <span>Studying</span>
+                    <strong>BCA, BVIMR</strong>
+                  </div>
+                  <div>
+                    <span>Currently</span>
+                    <strong>Java &amp; ML</strong>
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
-        <section className="section">
-          <div className="wrap">
-            <h2 className="section-head">Tools I reach for</h2>
-            <div className="skills">
+        <section className="section" id="skills">
+          <div className="wrap center-head">
+            <span className="eyebrow">Core stack</span>
+            <h2 className="big">Skills &amp; Technologies<span className="dot">.</span></h2>
+            <p className="section-intro">
+              A small stack, learned properly rather than a long list learned once.
+            </p>
+            <div className="grid">
               {skills.map((s) => (
-                <div key={s.group}>
-                  <h3>{s.group}</h3>
-                  <p>{s.items}</p>
+                <div className="cell" key={s.name}>
+                  <div className="cell-icon">{s.icon}</div>
+                  <h3>{s.name}</h3>
+                  <p className="cell-tag">{s.tag}</p>
+                  <p>{s.note}</p>
+                  <span className="cell-bar" />
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section about" id="about">
-          <div className="wrap">
-            <h2 className="section-head">About</h2>
-            <p>
-              Two or three short paragraphs. Start with what you are doing right
-              now — the degree, the job, the thing you are building — because
-              that is what someone reading this wants to place you by.
-            </p>
-            <p>
-              Then say what you are drawn to in the work. Not adjectives about
-              yourself, but the kind of problem you like being handed. Someone
-              hiring is trying to picture you on their team, and specifics do
-              that better than enthusiasm does.
-            </p>
-            <p>
-              Close with something human. What you read, build, play or argue
-              about when you are not at a terminal.
-            </p>
+        <section className="section band" id="tools">
+          <div className="wrap center-head">
+            <span className="eyebrow">Environment</span>
+            <h2 className="big">Tools I work in<span className="dot">.</span></h2>
+            <p className="section-intro">What I actually have open on a given day.</p>
+            <ul className="chips">
+              {tools.map((t) => (
+                <li key={t.name}>
+                  <span className="chip-icon">{t.icon}</span>
+                  {t.name}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        <section className="section" id="contact">
-          <div className="wrap">
-            <h2 className="section-head">Contact</h2>
-            <p className="contact-line">
-              Open to internships and full-time software roles.
+        <section className="section" id="education">
+          <div className="wrap center-head">
+            <span className="eyebrow">Academic background</span>
+            <h2 className="big">Education<span className="dot">.</span></h2>
+            <p className="section-intro">Where the foundations are coming from.</p>
+            {education.map((e) => (
+              <div className="entry" key={e.title + e.where}>
+                <div className="entry-when">
+                  <p className="entry-label">{e.label}</p>
+                  {e.when}
+                </div>
+                <div>
+                  <h3>{e.title}</h3>
+                  <p className="entry-where">{e.where}</p>
+                  <p className="entry-what">{e.what}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section band" id="involvement">
+          <div className="wrap center-head">
+            <span className="eyebrow">Beyond coursework</span>
+            <h2 className="big">Societies &amp; roles<span className="dot">.</span></h2>
+            <p className="section-intro">
+              Where I do the organising, designing and shipping that class doesn&apos;t cover.
             </p>
-            <a className="contact-mail" href={`mailto:${me.email}`}>
-              {me.email}
-            </a>
-            <div className="contact-else">
-              <a href={me.github} target="_blank" rel="noreferrer">
-                GitHub
+            {involvement.map((r) => (
+              <div className="entry" key={r.title + r.where}>
+                <div className="entry-when">
+                  <p className="entry-label">{r.label}</p>
+                  {r.when}
+                </div>
+                <div>
+                  <h3>{r.title}</h3>
+                  <p className="entry-where">{r.where}</p>
+                  <p className="entry-what">{r.what}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section" id="focus">
+          <div className="wrap center-head">
+            <span className="eyebrow">Current objectives</span>
+            <h2 className="big">What I&apos;m working on<span className="dot">.</span></h2>
+            <p className="section-intro">
+              What I&apos;m building, breaking, and slowly getting better at.
+            </p>
+            <div className="focus-list">
+              {focus.map((f, i) => (
+                <div className="focus-item" key={f.title}>
+                  <span className="focus-num">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{f.title}</h3>
+                    <p>{f.note}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section band" id="contact">
+          <div className="wrap center-head">
+            <span className="eyebrow">Get in touch</span>
+            <h2 className="big">Let&apos;s connect<span className="dot">.</span></h2>
+            <p className="section-intro">
+              Happy to talk about anything I&apos;m learning, or anything you think I should be.
+            </p>
+            <div className="contact-grid">
+              <a className="contact-cell" href={`mailto:${me.email}`}>
+                <p className="contact-key">Email</p>
+                <p className="contact-val">{me.email}</p>
               </a>
-              <a href={me.linkedin} target="_blank" rel="noreferrer">
-                LinkedIn
+              <a className="contact-cell" href={me.github} target="_blank" rel="noreferrer">
+                <p className="contact-key">GitHub</p>
+                <p className="contact-val">@tisheyy27</p>
               </a>
-              <a href={me.resume}>Résumé</a>
+              <a className="contact-cell" href={me.linkedin} target="_blank" rel="noreferrer">
+                <p className="contact-key">LinkedIn</p>
+                <p className="contact-val">Tisha Bajaj</p>
+              </a>
             </div>
           </div>
         </section>
@@ -218,7 +337,7 @@ export default function Home() {
 
       <footer className="foot">
         <div className="wrap">
-          Built with Next.js. © {new Date().getFullYear()} {me.name}.
+          © {new Date().getFullYear()} {me.name} — built with Next.js
         </div>
       </footer>
     </>
